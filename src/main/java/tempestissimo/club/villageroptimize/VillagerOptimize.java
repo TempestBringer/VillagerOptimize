@@ -9,7 +9,7 @@ public final class VillagerOptimize extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.saveConfig();
+        this.saveDefaultConfig();
         config = this.getConfig();
         pluginSelf = this;
         Boolean villager_spawn_zombie=config.getBoolean("optimize_config.villager_spawn_zombie");
