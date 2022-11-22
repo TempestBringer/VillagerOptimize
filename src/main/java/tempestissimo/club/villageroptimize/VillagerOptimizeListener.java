@@ -11,12 +11,15 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
+import java.util.List;
+
 import static org.bukkit.Bukkit.getLogger;
 
 public class VillagerOptimizeListener implements Listener {
     public Boolean villager_spawn_zombie;
     public Integer zombie_summon_count;
     public Integer villager_no_ai_limit;
+    public List<String> no_optimize_list;
 
     @EventHandler
     public void onVillagerSpawn(CreatureSpawnEvent e){
@@ -43,14 +46,14 @@ public class VillagerOptimizeListener implements Listener {
             Entity[] entities = e.getChunk().getEntities();
             if (entities.length>0)
             for (int i = 0; i < entities.length; i++) {
-                if (entities[i].getType() == EntityType.VILLAGER && !entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
+                if (entities[i].getType() == EntityType.VILLAGER && !no_optimize_list.contains(entities[i].getName())) {
                     if (count < villager_no_ai_limit) {
                         ((Villager) entities[i]).setAI(true);
                     } else {
                         ((Villager) entities[i]).setAI(false);
                     }
                     count += 1;
-                } else if (entities[i].getType() == EntityType.VILLAGER && entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
+                } else if (entities[i].getType() == EntityType.VILLAGER && no_optimize_list.contains(entities[i].getName())) {
                     ((Villager) entities[i]).setAI(true);
                 }
             }
@@ -67,9 +70,10 @@ public class VillagerOptimizeListener implements Listener {
         }
     }
 
-    public VillagerOptimizeListener(Boolean villager_spawn_zombie, Integer zombie_summon_count, Integer villager_no_ai_limit) {
+    public VillagerOptimizeListener(Boolean villager_spawn_zombie, Integer zombie_summon_count, Integer villager_no_ai_limit, List<String> no_optimize_list) {
         this.villager_spawn_zombie = villager_spawn_zombie;
         this.zombie_summon_count = zombie_summon_count;
         this.villager_no_ai_limit = villager_no_ai_limit;
+        this.no_optimize_list = no_optimize_list;
     }
 }

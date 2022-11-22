@@ -5,3 +5,8 @@ optimize_config:
   zombie_summon_count: 10
   # how many villager has AI in one chunk.
   villager_no_ai_limit: 3
+  # name the villager's name to one of the below names to avoid optimize.
+  no_optimize_villager_name:
+    - qwertyuiop
+    - asdfghjkl
+    - zxcvbnm
