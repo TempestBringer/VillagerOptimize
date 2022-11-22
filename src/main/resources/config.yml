@@ -1,4 +1,4 @@
-General:
+optimize_config:
   # make villager no more spawn baby villager, but zombie.
   villager_spawn_zombie: false
   # how many zombies once the villager spawn when 'villager_spawn_zombie' is set to true.

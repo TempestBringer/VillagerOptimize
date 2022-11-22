@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 
 import static org.bukkit.Bukkit.getLogger;
@@ -36,20 +37,23 @@ public class VillagerOptimizeListener implements Listener {
     }
 
     @EventHandler
-    public void autoNoAI(ChunkUnloadEvent e){
+    public void autoNoAI(ChunkLoadEvent e){
         if (e.getChunk().isLoaded()){
-            Integer count=0;
+            Integer count = 0;
             Entity[] entities = e.getChunk().getEntities();
+            if (entities.length>0)
+                System.out.println("Chunk has " + entities.length + " entities.");
             for (int i = 0; i < entities.length; i++) {
-                if (entities[i].getType()==EntityType.VILLAGER&& !entities[i].getName().equalsIgnoreCase("qwertyuiop")){
-                    if (count<villager_no_ai_limit){
+                if (entities[i].getType() == EntityType.VILLAGER && !entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
+                    if (count < villager_no_ai_limit) {
                         ((Villager) entities[i]).setAI(true);
-                    }
-                    else{
+                        getLogger().info("Villager set to hasAI");
+                    } else {
                         ((Villager) entities[i]).setAI(false);
+                        getLogger().info("Villager set to noAI");
                     }
-                    count+=1;
-                }else if(entities[i].getType()==EntityType.VILLAGER&&entities[i].getName().equalsIgnoreCase("qwertyuiop")){
+                    count += 1;
+                } else if (entities[i].getType() == EntityType.VILLAGER && entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
                     ((Villager) entities[i]).setAI(true);
                 }
             }
