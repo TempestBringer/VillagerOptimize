@@ -13,9 +13,9 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import static org.bukkit.Bukkit.getLogger;
 
 public class VillagerOptimizeListener implements Listener {
-    public Boolean villager_spawn_zombie=false;
-    public Integer zombie_summon_count=10;
-    public Integer villager_no_ai_limit=1;
+    public Boolean villager_spawn_zombie;
+    public Integer zombie_summon_count;
+    public Integer villager_no_ai_limit;
 
     @EventHandler
     public void onVillagerSpawn(CreatureSpawnEvent e){
