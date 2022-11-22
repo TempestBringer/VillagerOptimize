@@ -42,15 +42,12 @@ public class VillagerOptimizeListener implements Listener {
             Integer count = 0;
             Entity[] entities = e.getChunk().getEntities();
             if (entities.length>0)
-                System.out.println("Chunk has " + entities.length + " entities.");
             for (int i = 0; i < entities.length; i++) {
                 if (entities[i].getType() == EntityType.VILLAGER && !entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
                     if (count < villager_no_ai_limit) {
                         ((Villager) entities[i]).setAI(true);
-                        getLogger().info("Villager set to hasAI");
                     } else {
                         ((Villager) entities[i]).setAI(false);
-                        getLogger().info("Villager set to noAI");
                     }
                     count += 1;
                 } else if (entities[i].getType() == EntityType.VILLAGER && entities[i].getName().equalsIgnoreCase("qwertyuiop")) {
