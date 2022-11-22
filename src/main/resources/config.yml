@@ -1,0 +1,7 @@
+General:
+  # make villager no more spawn baby villager, but zombie.
+  villager_spawn_zombie: false
+  # how many zombies once the villager spawn when 'villager_spawn_zombie' is set to true.
+  zombie_summon_count: 10
+  # how many villager has AI in one chunk.
+  villager_no_ai_limit: 3

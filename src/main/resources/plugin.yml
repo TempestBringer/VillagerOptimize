@@ -1,0 +1,8 @@
+name: VillagerOptimize
+version: '${project.version}'
+main: tempestissimo.club.villageroptimize.VillagerOptimize
+api-version: 1.15
+prefix: VillagerOptimize
+authors: [ TempestZYTux ]
+description: A bukkit plugin to optimize villager performance by auto noAI.
+website: nope
