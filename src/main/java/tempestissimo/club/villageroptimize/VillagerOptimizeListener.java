@@ -40,7 +40,7 @@ public class VillagerOptimizeListener implements Listener {
     }
 
     @EventHandler
-    public void autoNoAI(ChunkLoadEvent e){
+    public void autoNoAIOnLoadChunk(ChunkLoadEvent e){
         if (e.getChunk().isLoaded()){
             Integer count = 0;
             Entity[] entities = e.getChunk().getEntities();
@@ -57,6 +57,27 @@ public class VillagerOptimizeListener implements Listener {
                     ((Villager) entities[i]).setAI(true);
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void autoNoAIOnUnloadChunk(ChunkUnloadEvent e){
+        if (e.getChunk().isLoaded()){
+            Integer count = 0;
+            Entity[] entities = e.getChunk().getEntities();
+            if (entities.length>0)
+                for (int i = 0; i < entities.length; i++) {
+                    if (entities[i].getType() == EntityType.VILLAGER && !no_optimize_list.contains(entities[i].getName())) {
+                        if (count < villager_no_ai_limit) {
+                            ((Villager) entities[i]).setAI(true);
+                        } else {
+                            ((Villager) entities[i]).setAI(false);
+                        }
+                        count += 1;
+                    } else if (entities[i].getType() == EntityType.VILLAGER && no_optimize_list.contains(entities[i].getName())) {
+                        ((Villager) entities[i]).setAI(true);
+                    }
+                }
         }
     }
 
