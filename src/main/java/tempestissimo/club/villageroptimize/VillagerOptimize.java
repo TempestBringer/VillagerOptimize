@@ -18,8 +18,9 @@ public final class VillagerOptimize extends JavaPlugin {
         Integer zombie_summon_count=config.getInt("optimize_config.zombie_summon_count");
         Integer villager_no_ai_limit=config.getInt("optimize_config.villager_no_ai_limit");
         List<String> no_optimize_list = config.getStringList("optimize_config.no_optimize_villager_name");
+        boolean completely_no_new_villager = config.getBoolean("optimize_config.completely_no_new_villager");
 
-        getServer().getPluginManager().registerEvents(new VillagerOptimizeListener(villager_spawn_zombie,zombie_summon_count,villager_no_ai_limit,no_optimize_list),this);
+        getServer().getPluginManager().registerEvents(new VillagerOptimizeListener(villager_spawn_zombie,zombie_summon_count,villager_no_ai_limit,no_optimize_list,completely_no_new_villager),this);
 
     }
 

@@ -21,9 +21,17 @@ public class VillagerOptimizeListener implements Listener {
     public Integer villager_no_ai_limit;
     public List<String> no_optimize_list;
 
+    public boolean completely_no_new_villager;
+
     @EventHandler
     public void onVillagerSpawn(CreatureSpawnEvent e){
-        if (villager_spawn_zombie&&e.getEntityType()== EntityType.VILLAGER){
+        if (e.getEntityType()!=EntityType.VILLAGER)
+            return;
+        if (completely_no_new_villager){
+            e.setCancelled(true);
+            return;
+        }
+        if (villager_spawn_zombie){
             Location loc = e.getLocation();
             if(e.getSpawnReason()== CreatureSpawnEvent.SpawnReason.BREEDING){
                 getLogger().info("Villager Spawn Cancelled");
@@ -91,10 +99,13 @@ public class VillagerOptimizeListener implements Listener {
         }
     }
 
-    public VillagerOptimizeListener(Boolean villager_spawn_zombie, Integer zombie_summon_count, Integer villager_no_ai_limit, List<String> no_optimize_list) {
+    public VillagerOptimizeListener(Boolean villager_spawn_zombie, Integer zombie_summon_count,
+                                    Integer villager_no_ai_limit, List<String> no_optimize_list,
+                                    boolean completely_no_new_villager) {
         this.villager_spawn_zombie = villager_spawn_zombie;
         this.zombie_summon_count = zombie_summon_count;
         this.villager_no_ai_limit = villager_no_ai_limit;
         this.no_optimize_list = no_optimize_list;
+        this.completely_no_new_villager = completely_no_new_villager;
     }
 }
